@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internshala Automation</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script>
+        async function startAutomation() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const jobtype = document.getElementById('jobtype').value;
+            const location = document.getElementById('location').value;
+
+            const response = await fetch('/start-automation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password, jobtype, location }),
+            });
+
+            const result = await response.json();
+            const messageDiv = document.getElementById('message');
+            if (response.status === 200) {
+                messageDiv.textContent = result.message;
+                messageDiv.style.color = 'green';
+            } else {
+                messageDiv.textContent = result.message;
+                messageDiv.style.color = 'red';
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Automate Job Applications on Naukri</h1>
+
+        <form onsubmit="event.preventDefault(); startAutomation();">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="jobtype">Job Type:</label>
+                <input type="text" id="jobtype" name="jobtype" required>
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location:</label>
+                <input type="text" id="location" name="location" required>
+            </div>
+
+            <button type="submit">Start Automation</button>
+        </form>
+
+        <div id="message" class="message"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Results</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to your CSS -->
+</head>
+<body>
+    <h1>Top 10 Job Listings</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Job Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Apply Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% jobDetails.forEach(job => { %>
+                <tr>
+                    <td><%= job.title %></td>
+                    <td><%= job.company %></td>
+                    <td><%= job.location %></td>
+                    <td><a href="<%= job.jobUrl %>" target="_blank">Apply Now</a></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <a href="/">Back to Search</a>
+</body>
+</html>
